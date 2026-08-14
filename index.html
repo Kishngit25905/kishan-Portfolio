@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kishan G — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --panel:#141A22;
+    --panel-2:#0F151C;
+    --line:#242C38;
+    --text:#E6EDF3;
+    --muted:#8B96A5;
+    --amber:#F0A62B;
+    --teal:#3FB8AF;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(63,184,175,0.06), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(240,166,43,0.05), transparent 40%);
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* status bar */
+  .statusbar{
+    border-bottom:1px solid var(--line);
+    background:var(--panel-2);
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.04em;
+  }
+  .statusbar .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:12px; padding-bottom:12px; flex-wrap:wrap; gap:8px;
+  }
+  .dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:var(--teal); margin-right:8px;
+    box-shadow:0 0 0 0 rgba(63,184,175,0.6);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(63,184,175,0.5);}
+    70%{box-shadow:0 0 0 6px rgba(63,184,175,0);}
+    100%{box-shadow:0 0 0 0 rgba(63,184,175,0);}
+  }
+  .status-right span{color:var(--amber);}
+
+  /* hero */
+  header.hero{
+    padding:64px 0 48px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:40px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--teal);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--mono);
+    font-size:44px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    line-height:1.1;
+    margin-bottom:14px;
+  }
+  .role-line{
+    font-size:17px;
+    color:var(--muted);
+    max-width:520px;
+    margin-bottom:22px;
+  }
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:14px;
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+  }
+  .contact-row a:hover{color:var(--amber);}
+  .contact-row span.sep{color:var(--line);}
+
+  .photo-frame{
+    width:168px; height:168px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--panel);
+    position:relative;
+    flex-shrink:0;
+  }
+  .photo-frame img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.92) contrast(1.02);}
+  .photo-frame::after{
+    content:'';
+    position:absolute; inset:0;
+    box-shadow:inset 0 0 0 1px rgba(240,166,43,0.15);
+  }
+
+  /* section shell */
+  section{padding:56px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-label{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--amber);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .sec-title{
+    font-family:var(--mono);
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:28px;
+  }
+
+  /* about / polymath answer */
+  .answer-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--teal);
+    border-radius:6px;
+    padding:28px 30px;
+    font-size:16px;
+    color:#D6DEE7;
+  }
+  .answer-card .q{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:14px;
+  }
+
+  /* projects */
+  .project{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px 26px;
+    margin-bottom:16px;
+    position:relative;
+  }
+  .project:hover{border-color:#33404F;}
+  .project-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    flex-wrap:wrap; gap:8px;
+    margin-bottom:10px;
+  }
+  .project-name{font-family:var(--mono); font-weight:600; font-size:16px;}
+  .project-year{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  .project-sub{font-size:13px; color:var(--teal); font-family:var(--mono); margin-bottom:12px;}
+  .project ul{padding-left:18px; color:var(--muted); font-size:14.5px;}
+  .project li{margin-bottom:6px;}
+  .project li::marker{color:var(--amber);}
+  .stack{
+    display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;
+  }
+  .stack span{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--muted);
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    padding:3px 8px;
+    border-radius:4px;
+  }
+
+  /* skills */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:20px;
+  }
+  .skill-group h4{
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--mono); font-size:12px;
+    background:var(--panel); border:1px solid var(--line);
+    padding:5px 10px; border-radius:4px; color:var(--text);
+  }
+
+  /* certs */
+  .certs{list-style:none; display:grid; gap:10px;}
+  .certs li{
+    font-size:14.5px; color:var(--muted);
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .certs li::before{
+    content:'✓'; color:var(--teal); font-family:var(--mono); font-weight:700;
+  }
+  .certs strong{color:var(--text); font-weight:600;}
+
+  /* video */
+  .video-slot{
+    border:1px dashed var(--line);
+    border-radius:8px;
+    background:var(--panel-2);
+    aspect-ratio:16/9;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px;
+    color:var(--muted);
+    font-family:var(--mono);
+    font-size:13px;
+    text-align:center;
+    padding:20px;
+  }
+  .video-slot .play{
+    width:44px; height:44px; border-radius:50%;
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--amber); font-size:16px;
+  }
+  /* Uncomment and use this instead of .video-slot once you have a link:
+  <div class="video-embed">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/VIDEO_ID"
+      title="Kishan G — Intro" frameborder="0" allowfullscreen></iframe>
+  </div>
+  */
+  .video-embed{
+    border-radius:8px; overflow:hidden; aspect-ratio:16/9; border:1px solid var(--line);
+  }
+  .video-embed iframe{width:100%; height:100%; display:block; border:0;}
+
+  /* resume / cta */
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px;
+    padding:12px 20px; border-radius:6px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line);
+  }
+  .btn-primary{background:var(--amber); color:#171008; border-color:var(--amber); font-weight:600;}
+  .btn-primary:hover{background:#f3b551;}
+  .btn-ghost{color:var(--text); background:transparent;}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+  footer{
+    padding:36px 0 50px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:640px){
+    .hero-grid{grid-template-columns:1fr; text-align:left;}
+    .photo-frame{order:-1;}
+    h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="statusbar">
+    <div class="wrap">
+      <div><span class="dot"></span>STATUS: OPEN_TO_OPPORTUNITIES</div>
+      <div class="status-right">BUILD: <span>4TH_YEAR</span> · ISE · NMIT_BENGALURU</div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">// Portfolio — Hackathon Pre-Screen Submission</div>
+        <h1>Kishan G</h1>
+        <p class="role-line">Information Science undergrad building cloud data pipelines, computer vision systems, and AI-integrated apps — currently thinking a lot about the business side too.</p>
+        <div class="contact-row">
+          <a href="mailto:kishikg11@gmail.com">kishikg11@gmail.com</a>
+          <span class="sep">/</span>
+          <span>+91 6364233498</span>
+          <span class="sep">/</span>
+          <span>Bengaluru, KA</span>
+        </div>
+      </div>
+      <div class="photo-frame">
+        <img src="photo.jpeg" alt="Kishan G">
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-label">01 · The Polymath Question</div>
+      <div class="sec-title">What makes you want to build like a polymath?</div>
+      <div class="answer-card">
+        <div class="q">— 100 word answer —</div>
+        Honestly, I don't think in single lanes. I'll spend a night tuning a Dataflow pipeline and the next wondering if it could actually be sold to a shop owner who's never heard the word pipeline. That gap is where I like living. Building CrowdIQ taught me the tech isn't the hard part — figuring out who'd pay for it is. Lately I've been sketching a small AI tool for local shops near NMIT to handle inventory and customer queries without extra hires. It's not live yet, but I keep coming back to it. That's the entrepreneur in me talking — I don't just want to build, I want to build things people need.
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-label">02 · Selected Work</div>
+      <div class="sec-title">Projects</div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">StreamSight AI</span>
+          <span class="project-year">2026</span>
+        </div>
+        <div class="project-sub">Real-Time Data Pipeline &amp; Anomaly Detection Platform</div>
+        <ul>
+          <li>Architected a cloud-native streaming pipeline on Pub/Sub + Dataflow — 1 event/sec sustained throughput, 10s window aggregation, 5s early-trigger updates, autoscaling infra.</li>
+          <li>Built a two-method anomaly detection layer (Isolation Forest + z-score) — 51 flagged via z-score, 14 via Isolation Forest, 100% cross-method overlap.</li>
+          <li>Shipped a live Looker Studio dashboard on top of BigQuery for near-real-time monitoring.</li>
+        </ul>
+        <div class="stack">
+          <span>Pub/Sub</span><span>Dataflow</span><span>Apache Beam</span><span>BigQuery</span><span>Python</span><span>Scikit-learn</span><span>Looker Studio</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">CrowdIQ</span>
+          <span class="project-year">2025</span>
+        </div>
+        <div class="project-sub">Real-Time Crowd Detection &amp; Analytics System</div>
+        <ul>
+          <li>Multi-object detection &amp; tracking with YOLOv8 + DeepSORT — ~21 FPS on CPU-only hardware, no GPU.</li>
+          <li>Zone-based analytics (footfall, dwell-time, density heatmaps) via point-in-polygon logic — 8,700+ tracked events into SQLite.</li>
+          <li>Found DeepSORT's re-ID embedding as the bottleneck; frame-skipping optimization gave a 2.1x FPS gain (2.95 → 6.24 FPS).</li>
+        </ul>
+        <div class="stack">
+          <span>Python</span><span>YOLOv8</span><span>DeepSORT</span><span>OpenCV</span><span>SQLite</span><span>Streamlit</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <span class="project-name">Smart College Companion</span>
+          <span class="project-year">2025</span>
+        </div>
+        <div class="project-sub">Flutter-Based Academic Productivity App</div>
+        <ul>
+          <li>Cross-platform Android app, modular architecture across 8 academic management modules.</li>
+          <li>Integrated Groq AI (LLaMA 3.3 70B) to power an in-app doubt-resolution chatbot.</li>
+          <li>Covers attendance, timetable, assignments, internal-marks prediction, notes, exam countdown, and semester-wise CGPA calc.</li>
+        </ul>
+        <div class="stack">
+          <span>Flutter</span><span>Dart</span><span>Groq API</span><span>Hive DB</span><span>Android SDK</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-label">03 · Toolkit</div>
+      <div class="sec-title">Skills</div>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="tag-row">
+            <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>AI / ML</h4>
+          <div class="tag-row">
+            <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">OpenCV</span><span class="tag">YOLOv8</span><span class="tag">TF Lite</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Cloud &amp; Data</h4>
+          <div class="tag-row">
+            <span class="tag">GCP</span><span class="tag">Pub/Sub</span><span class="tag">Dataflow</span><span class="tag">BigQuery</span><span class="tag">ETL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Databases &amp; Viz</h4>
+          <div class="tag-row">
+            <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">Looker Studio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certs">
+    <div class="wrap">
+      <div class="sec-label">04 · Credentials</div>
+      <div class="sec-title">Certifications</div>
+      <ul class="certs">
+        <li><strong>Google Cloud Computing Foundations</strong> — Google Cloud</li>
+        <li><strong>Oracle Cloud Infrastructure Foundations</strong> — Oracle</li>
+        <li><strong>Data Scientist Certification</strong> — Simplilearn</li>
+        <li><strong>AWS AI Practitioner Challenge</strong> — Udacity</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="wrap">
+      <div class="sec-label">05 · Intro Video</div>
+      <div class="sec-title">Video Submission</div>
+
+      <!-- Replace this block with .video-embed (see CSS comment above) once you have your YouTube/Drive link -->
+      <div class="video-slot">
+        <div class="play">▶</div>
+        <div>Video not linked yet<br>Paste your YouTube (unlisted) or Drive embed link here</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume">
+    <div class="wrap">
+      <div class="sec-label">06 · Full Details</div>
+      <div class="sec-title">Resume</div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="KISHAN_RESUME.pdf" target="_blank">↓ Download Resume (PDF)</a>
+        <a class="btn btn-ghost" href="mailto:kishikg11@gmail.com">Email Me</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+      <span>© 2026 Kishan G</span>
+      <span>Built for Eonexea AI × Polymath Innovae Hackathon Pre-Screen</span>
+    </div>
+  </footer>
+
+</body>
+</html>
